@@ -6,6 +6,7 @@
     <title>Weekly Lesson Plan</title>
     <style>
         * {
+            box-sizing: border-box;
             user-select: none;
         }
         body {
@@ -13,88 +14,36 @@
             background-color: #f0f0f0;
             margin: 0;
             padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
         .planner {
-            border-radius: 8px;
-            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
         }
         h1 {
             text-align: center;
             color: #333;
-            margin-bottom: 20px;
-        }
-        .header {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        .header input {
-            width: 100%;
-            padding: 5px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        .subjects {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 5px;
             margin-bottom: 10px;
-        }
-        .subject {
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 4px;
-            font-size: 24px;
-            font-weight: bold;
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: auto repeat(7, 1fr) auto;
-            gap: 1px;
-            border-radius: 10px;
-        }
-        .grid > div {
-            background-color: white;
-            padding: 10px;
-            min-height: 80px;
-            border-radius: 10px;
-        }
-        .day {
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-            transform: rotate(180deg);
-            background-color: #f9f9f9 !important;
-        }
-        .cell {
-            border: 1px solid #eee;
-            min-height: 80px;
-        }
-        .date-box {
-            border-left: 1px solid #ddd;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
+            font-size: 1.5em;
         }
         .materials {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 5px;
+            margin-bottom: 10px;
         }
         .material {
-            border-radius: 4px;
-            padding: 5px 10px;
+            border-radius: 50px;
+            padding: 10px 10px;
+            margin-bottom: 5px;
             cursor: move;
-            font-size: 14px;
+            font-size: 1.1em;
             position: relative;
+            touch-action: none;
         }
         .material .delete-btn {
             display: none;
@@ -114,8 +63,48 @@
         .material:hover .delete-btn {
             display: block;
         }
+        .grid {
+            display: grid;
+            grid-template-columns: auto repeat(7, 1fr);
+            gap: 1px;
+            flex-grow: 1;
+        }
+        .grid > div {
+            background-color: white;
+            padding: 5px;
+            min-height: 40px;
+            font-size: 0.8em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .day {
+            font-weight: bold;
+            border-radius: 100px;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+            background-color: #f9f9f9 !important;
+        }
+        .cell {
+            border: 1px solid #eee;
+            border-radius: 20px;
+            min-height: 40px;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            overflow-y: auto;
+        }
         .cell.over {
             border: 2px dashed #000;
+        }
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: auto repeat(4, 1fr);
+            }
+            .grid > div:nth-child(n+6) {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -123,25 +112,24 @@
     <div class="planner">
         <h1>WEEKLY LESSON PLAN (First Secondary)</h1>
         <div class="materials">
-            <div class="material" draggable="true" style="background-color: #ffeeba;">History</div>
-            <div class="material" draggable="true" style="background-color: #d4edda;">Mathematics</div>
-            <div class="material" draggable="true" style="background-color: #e2e3e5;">English</div>
-            <div class="material" draggable="true" style="background-color: #cce5ff;">Integrated Sciences</div>
-            <div class="material" draggable="true" style="background-color: #f8d7da;">Philosophy and Logic</div>
-            <div class="material" draggable="true" style="background-color: #d1ecf1;">Arabic</div>
-            <div class="material" draggable="true" style="background-color: #e9ecef;">German</div>
+            <div class="material" draggable="true" style="background-color: #ffeeba;">History🗡️</div>
+            <div class="material" draggable="true" style="background-color: #d4edda;">Mathematics📐</div>
+            <div class="material" draggable="true" style="background-color: #e2e3e5;">English📖</div>
+            <div class="material" draggable="true" style="background-color: #cce5ff;">Sciences🔬</div>
+            <div class="material" draggable="true" style="background-color: #f8d7da;">Philosophy🤔</div>
+            <div class="material" draggable="true" style="background-color: #d1ecf1;">Arabic🕌</div>
+            <div class="material" draggable="true" style="background-color: #e9ecef;">German🇩🇪</div>
         </div>
         <div class="grid">
             <div class="day">H/Day</div>
-            <div class="subject" style="background-color: #ffeeba;">02 &#8594; 03</div>
-            <div class="subject" style="background-color: #d4edda;">03 &#8594; 04</div>
-            <div class="subject" style="background-color: #e2e3e5;">04 &#8594; 05</div>
-            <div class="subject" style="background-color: #cce5ff;">05 &#8594; 06</div>
-            <div class="subject" style="background-color: #f8d7da;">06 &#8594; 07</div>
-            <div class="subject" style="background-color: #d1ecf1;">07 &#8594; 08</div>
-            <div class="subject" style="background-color: #e9ecef;">08 &#8594; 09</div>
-            <br>
-            <div class="day">SATURDAY</div>
+            <div class="subject" style="background-color: #ffeeba; font-size: 1.1rem; font-weight: bold; border-radius: 100px;">02-03</div>
+            <div class="subject" style="background-color: #d4edda; font-size: 1.1rem; font-weight: bold; border-radius: 100px;">03-04</div>
+            <div class="subject" style="background-color: #e2e3e5; font-size: 1.1rem; font-weight: bold; border-radius: 100px;">04-05</div>
+            <div class="subject" style="background-color: #cce5ff; font-size: 1.1rem; font-weight: bold; border-radius: 100px;">05-06</div>
+            <div class="subject" style="background-color: #f8d7da; font-size: 1.1rem; font-weight: bold; border-radius: 100px;">06-07</div>
+            <div class="subject" style="background-color: #d1ecf1; font-size: 1.1rem; font-weight: bold; border-radius: 100px;">07-08</div>
+            <div class="subject" style="background-color: #e9ecef; font-size: 1.1rem; font-weight: bold; border-radius: 100px;">08-09</div>
+            <div class="day">SAT</div>
             <div class="cell" data-day="saturday"></div>
             <div class="cell" data-day="saturday"></div>
             <div class="cell" data-day="saturday"></div>
@@ -149,8 +137,7 @@
             <div class="cell" data-day="saturday"></div>
             <div class="cell" data-day="saturday"></div>
             <div class="cell" data-day="saturday"></div>
-            <br>
-            <div class="day">SUNDAY</div>
+            <div class="day">SUN</div>
             <div class="cell" data-day="sunday"></div>
             <div class="cell" data-day="sunday"></div>
             <div class="cell" data-day="sunday"></div>
@@ -158,8 +145,7 @@
             <div class="cell" data-day="sunday"></div>
             <div class="cell" data-day="sunday"></div>
             <div class="cell" data-day="sunday"></div>
-            <br>
-            <div class="day">MONDAY</div>
+            <div class="day">MON</div>
             <div class="cell" data-day="monday"></div>
             <div class="cell" data-day="monday"></div>
             <div class="cell" data-day="monday"></div>
@@ -167,8 +153,7 @@
             <div class="cell" data-day="monday"></div>
             <div class="cell" data-day="monday"></div>
             <div class="cell" data-day="monday"></div>
-            <br>
-            <div class="day">TUESDAY</div>
+            <div class="day">TUE</div>
             <div class="cell" data-day="tuesday"></div>
             <div class="cell" data-day="tuesday"></div>
             <div class="cell" data-day="tuesday"></div>
@@ -176,8 +161,7 @@
             <div class="cell" data-day="tuesday"></div>
             <div class="cell" data-day="tuesday"></div>
             <div class="cell" data-day="tuesday"></div>
-            <br>
-            <div class="day">WEDNESDAY</div>
+            <div class="day">WED</div>
             <div class="cell" data-day="wednesday"></div>
             <div class="cell" data-day="wednesday"></div>
             <div class="cell" data-day="wednesday"></div>
@@ -185,8 +169,7 @@
             <div class="cell" data-day="wednesday"></div>
             <div class="cell" data-day="wednesday"></div>
             <div class="cell" data-day="wednesday"></div>
-            <br>
-            <div class="day">THURSDAY</div>
+            <div class="day">THU</div>
             <div class="cell" data-day="thursday"></div>
             <div class="cell" data-day="thursday"></div>
             <div class="cell" data-day="thursday"></div>
@@ -194,8 +177,7 @@
             <div class="cell" data-day="thursday"></div>
             <div class="cell" data-day="thursday"></div>
             <div class="cell" data-day="thursday"></div>
-            <br>
-            <div class="day">FRIDAY</div>
+            <div class="day">FRI</div>
             <div class="cell" data-day="friday"></div>
             <div class="cell" data-day="friday"></div>
             <div class="cell" data-day="friday"></div>
@@ -203,46 +185,106 @@
             <div class="cell" data-day="friday"></div>
             <div class="cell" data-day="friday"></div>
             <div class="cell" data-day="friday"></div>
-            <br>
         </div>
     </div>
 
     <script>
         const materials = document.querySelectorAll('.material');
         const cells = document.querySelectorAll('.cell');
-        const headerInputs = document.querySelectorAll('.header input');
-        const dateBoxes = document.querySelectorAll('.date-box');
 
-        window.addEventListener('load', loadSavedData);
+        let draggedItem = null;
+        let touchTimer = null;
 
-        materials.forEach(material => {
-            material.addEventListener('dragstart', dragStart);
-            material.addEventListener('dragend', dragEnd);
-        });
+        function isTouchDevice() {
+            return 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+        }
 
-        cells.forEach(cell => {
-            cell.addEventListener('dragover', dragOver);
-            cell.addEventListener('dragenter', dragEnter);
-            cell.addEventListener('dragleave', dragLeave);
-            cell.addEventListener('drop', drop);
-        });
+        if (isTouchDevice()) {
+            materials.forEach(material => {
+                material.addEventListener('touchstart', touchStart);
+                material.addEventListener('touchend', touchEnd);
+                material.addEventListener('touchmove', touchMove);
+            });
 
-        headerInputs.forEach(input => {
-            input.addEventListener('input', saveData);
-        });
+            cells.forEach(cell => {
+                cell.addEventListener('touchstart', cellTouchStart);
+                cell.addEventListener('touchend', cellTouchEnd);
+            });
+        } else {
+            materials.forEach(material => {
+                material.addEventListener('dragstart', dragStart);
+                material.addEventListener('dragend', dragEnd);
+            });
 
-        dateBoxes.forEach(box => {
-            box.addEventListener('input', saveData);
-        });
+            cells.forEach(cell => {
+                cell.addEventListener('dragover', dragOver);
+                cell.addEventListener('dragenter', dragEnter);
+                cell.addEventListener('dragleave', dragLeave);
+                cell.addEventListener('drop', drop);
+            });
+        }
+
+        function touchStart(e) {
+            draggedItem = this.cloneNode(true);
+            draggedItem.style.position = 'absolute';
+            draggedItem.style.opacity = '0.8';
+            document.body.appendChild(draggedItem);
+
+            touchTimer = setTimeout(() => {
+                this.style.opacity = '0.5';
+            }, 100);
+
+            updateDraggedItemPosition(e.touches[0].clientX, e.touches[0].clientY);
+        }
+
+        function touchMove(e) {
+            e.preventDefault();
+            if (draggedItem) {
+                updateDraggedItemPosition(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        }
+
+        function touchEnd(e) {
+            clearTimeout(touchTimer);
+            if (draggedItem) {
+                const cellBelow = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+                if (cellBelow && cellBelow.classList.contains('cell')) {
+                    const newMaterial = createMaterialElement(draggedItem.outerHTML);
+                    cellBelow.appendChild(newMaterial);
+                }
+                document.body.removeChild(draggedItem);
+                draggedItem = null;
+                this.style.opacity = '1';
+                saveData();
+            }
+        }
+
+        function updateDraggedItemPosition(x, y) {
+            draggedItem.style.left = x - draggedItem.offsetWidth / 2 + 'px';
+            draggedItem.style.top = y - draggedItem.offsetHeight / 2 + 'px';
+        }
+
+        function cellTouchStart(e) {
+            touchTimer = setTimeout(() => {
+                const materialToDelete = e.target.closest('.material');
+                if (materialToDelete) {
+                    materialToDelete.remove();
+                    saveData();
+                }
+            }, 500);
+        }
+
+        function cellTouchEnd() {
+            clearTimeout(touchTimer);
+        }
 
         function dragStart(e) {
-            e.dataTransfer.setData('text/plain', this.textContent);
             e.dataTransfer.setData('text/html', this.outerHTML);
+            this.style.opacity = '0.5';
         }
 
         function dragEnd() {
             this.style.opacity = '1';
-            saveData();
         }
 
         function dragOver(e) {
@@ -281,17 +323,21 @@
             });
             newMaterial.appendChild(deleteBtn);
 
-            newMaterial.addEventListener('dragstart', dragStart);
-            newMaterial.addEventListener('dragend', dragEnd);
+            if (isTouchDevice()) {
+                newMaterial.addEventListener('touchstart', touchStart);
+                newMaterial.addEventListener('touchend', touchEnd);
+                newMaterial.addEventListener('touchmove', touchMove);
+            } else {
+                newMaterial.addEventListener('dragstart', dragStart);
+                newMaterial.addEventListener('dragend', dragEnd);
+            }
 
             return newMaterial;
         }
 
         function saveData() {
             const plannerData = {
-                headerInputs: Array.from(headerInputs).map(input => input.value),
-                cells: Array.from(cells).map(cell => cell.innerHTML),
-                dateBoxes: Array.from(dateBoxes).map(box => box.textContent)
+                cells: Array.from(cells).map(cell => cell.innerHTML)
             };
             localStorage.setItem('weeklyPlannerData', JSON.stringify(plannerData));
         }
@@ -301,27 +347,27 @@
             if (savedData) {
                 const plannerData = JSON.parse(savedData);
                 
-                headerInputs.forEach((input, index) => {
-                    input.value = plannerData.headerInputs[index] || '';
-                });
-
                 cells.forEach((cell, index) => {
                     cell.innerHTML = plannerData.cells[index] || '';
                     cell.querySelectorAll('.material').forEach(material => {
-                        material.addEventListener('dragstart', dragStart);
-                        material.addEventListener('dragend', dragEnd);
+                        if (isTouchDevice()) {
+                            material.addEventListener('touchstart', touchStart);
+                            material.addEventListener('touchend', touchEnd);
+                            material.addEventListener('touchmove', touchMove);
+                        } else {
+                            material.addEventListener('dragstart', dragStart);
+                            material.addEventListener('dragend', dragEnd);
+                        }
                         material.querySelector('.delete-btn').addEventListener('click', function() {
                             material.remove();
                             saveData();
                         });
                     });
                 });
-
-                dateBoxes.forEach((box, index) => {
-                    box.textContent = plannerData.dateBoxes[index] || '';
-                });
             }
         }
+
+        window.addEventListener('load', loadSavedData);
     </script>
 </body>
 </html>
